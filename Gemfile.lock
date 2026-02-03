@@ -90,6 +90,7 @@ GEM
     drb (2.2.3)
     erb (6.0.1)
     erubi (1.13.1)
+    getoptlong (0.2.1)
     globalid (1.3.0)
       activesupport (>= 6.1)
     i18n (1.14.8)
@@ -144,6 +145,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.0-x86_64-linux-musl)
       racc (~> 1.4)
+    ostruct (0.6.3)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -260,14 +262,20 @@ DEPENDENCIES
   base64
   bigdecimal
   debug
+  drb
+  getoptlong
   importmap-rails
+  io-console
+  logger
   mutex_m
+  ostruct
   puma (~> 6.0)
   rails (~> 7.1)
   roo (~> 2.10)
   roo-xls (~> 1.2)
   sprockets-rails
   stimulus-rails (~> 1.3)
+  stringio
   turbo-rails (~> 2.0)
   web-console
 
@@ -297,6 +305,7 @@ CHECKSUMS
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   erb (6.0.1) sha256=28ecdd99c5472aebd5674d6061e3c6b0a45c049578b071e5a52c2a7f13c197e5
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
+  getoptlong (0.2.1) sha256=fd23f07397b994bf9310d4531cfdb4332629a9b8e8c9c457c32b7edf5bf21ba5
   globalid (1.3.0) sha256=05c639ad6eb4594522a0b07983022f04aa7254626ab69445a0e493aa3786ff11
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   importmap-rails (2.2.3) sha256=7101be2a4dc97cf1558fb8f573a718404c5f6bcfe94f304bf1f39e444feeb16a
@@ -322,6 +331,7 @@ CHECKSUMS
   nokogiri (1.19.0-x86_64-darwin) sha256=1dad56220b603a8edb9750cd95798bffa2b8dd9dd9aa47f664009ee5b43e3067
   nokogiri (1.19.0-x86_64-linux-gnu) sha256=f482b95c713d60031d48c44ce14562f8d2ce31e3a9e8dd0ccb131e9e5a68b58c
   nokogiri (1.19.0-x86_64-linux-musl) sha256=1c4ca6b381622420073ce6043443af1d321e8ed93cc18b08e2666e5bd02ffae4
+  ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
   pp (0.6.3) sha256=2951d514450b93ccfeb1df7d021cae0da16e0a7f95ee1e2273719669d0ab9df6
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85

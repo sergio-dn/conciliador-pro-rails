@@ -13,10 +13,16 @@ gem 'stimulus-rails', '~> 1.3'
 gem 'roo', '~> 2.10'
 gem 'roo-xls', '~> 1.2'
 
-# Ruby compatibility
+# Ruby compatibility for newer versions (3.4+)
 gem 'base64'
 gem 'bigdecimal'
 gem 'mutex_m'
+gem 'io-console'
+gem 'stringio'
+gem 'logger'
+gem 'drb'
+gem 'getoptlong'
+gem 'ostruct'
 
 # Development
 group :development do
