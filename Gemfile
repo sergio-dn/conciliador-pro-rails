@@ -13,6 +13,11 @@ gem 'stimulus-rails', '~> 1.3'
 gem 'roo', '~> 2.10'
 gem 'roo-xls', '~> 1.2'
 
+# Ruby compatibility
+gem 'base64'
+gem 'bigdecimal'
+gem 'mutex_m'
+
 # Development
 group :development do
   gem 'web-console'
