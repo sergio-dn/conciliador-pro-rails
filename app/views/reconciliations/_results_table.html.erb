@@ -1,0 +1,131 @@
+<div class="results-table-container">
+  <% case current_tab %>
+  <% when 'matched' %>
+    <% if result.matched_pairs.any? %>
+      <table class="results-table matched-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Confianza</th>
+            <th colspan="3" class="group-header bank">Banco</th>
+            <th colspan="3" class="group-header sales">Ventas</th>
+            <th>Diferencia</th>
+          </tr>
+          <tr class="subheader">
+            <th></th>
+            <th></th>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Referencia</th>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Referencia</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% result.matched_pairs.each do |pair| %>
+            <tr class="<%= pair.exact? ? 'exact-match' : 'fuzzy-match' %>">
+              <td>
+                <span class="match-type <%= pair.match_type %>">
+                  <%= pair.match_type_label %>
+                </span>
+              </td>
+              <td>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" style="width: <%= pair.confidence_percentage %>%"></div>
+                  <span class="confidence-text"><%= pair.confidence_percentage %>%</span>
+                </div>
+              </td>
+              <td><%= pair.bank_record.date %></td>
+              <td class="amount">$<%= number_with_delimiter(pair.bank_record.amount.round(2)) %></td>
+              <td class="reference"><%= truncate(pair.bank_record.reference, length: 20) %></td>
+              <td><%= pair.sales_record.date %></td>
+              <td class="amount">$<%= number_with_delimiter(pair.sales_record.amount.round(2)) %></td>
+              <td class="reference"><%= truncate(pair.sales_record.reference, length: 20) %></td>
+              <td class="difference <%= pair.amount_diff.zero? ? 'zero' : 'nonzero' %>">
+                <% if pair.amount_diff != 0 %>
+                  <%= pair.amount_diff > 0 ? '+' : '' %>$<%= number_with_delimiter(pair.amount_diff.round(2)) %>
+                <% else %>
+                  -
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        <p>No se encontraron transacciones conciliadas</p>
+      </div>
+    <% end %>
+
+  <% when 'unmatched_bank' %>
+    <% if result.unmatched_bank.any? %>
+      <table class="results-table unmatched-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Referencia</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% result.unmatched_bank.each do |record| %>
+            <tr>
+              <td><%= record.date %></td>
+              <td class="amount">$<%= number_with_delimiter(record.amount.round(2)) %></td>
+              <td class="reference"><%= truncate(record.reference, length: 25) %></td>
+              <td class="description"><%= truncate(record.description, length: 40) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="empty-state success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <p>Todas las transacciones del banco fueron conciliadas</p>
+      </div>
+    <% end %>
+
+  <% when 'unmatched_sales' %>
+    <% if result.unmatched_sales.any? %>
+      <table class="results-table unmatched-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Referencia</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% result.unmatched_sales.each do |record| %>
+            <tr>
+              <td><%= record.date %></td>
+              <td class="amount">$<%= number_with_delimiter(record.amount.round(2)) %></td>
+              <td class="reference"><%= truncate(record.reference, length: 25) %></td>
+              <td class="description"><%= truncate(record.description, length: 40) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="empty-state success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <p>Todas las transacciones de ventas fueron conciliadas</p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

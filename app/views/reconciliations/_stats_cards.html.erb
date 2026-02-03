@@ -1,0 +1,78 @@
+<div class="stats-grid">
+  <div class="stat-card primary">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    </div>
+    <div class="stat-content">
+      <span class="stat-value"><%= result.match_rate %>%</span>
+      <span class="stat-label">Tasa de Conciliación</span>
+    </div>
+  </div>
+
+  <div class="stat-card success">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    <div class="stat-content">
+      <span class="stat-value"><%= result.total_matched %></span>
+      <span class="stat-label">Transacciones Conciliadas</span>
+      <span class="stat-detail">
+        <%= result.exact_matches_count %> exactas / <%= result.fuzzy_matches_count %> aproximadas
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card warning">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </div>
+    <div class="stat-content">
+      <span class="stat-value"><%= result.unmatched_bank_count %></span>
+      <span class="stat-label">Sin Match en Banco</span>
+      <span class="stat-detail">$<%= number_with_delimiter(result.unmatched_bank_amount.round(2)) %></span>
+    </div>
+  </div>
+
+  <div class="stat-card danger">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="15" y1="9" x2="9" y2="15"/>
+        <line x1="9" y1="9" x2="15" y2="15"/>
+      </svg>
+    </div>
+    <div class="stat-content">
+      <span class="stat-value"><%= result.unmatched_sales_count %></span>
+      <span class="stat-label">Sin Match en Ventas</span>
+      <span class="stat-detail">$<%= number_with_delimiter(result.unmatched_sales_amount.round(2)) %></span>
+    </div>
+  </div>
+
+  <div class="stat-card info">
+    <div class="stat-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="1" x2="12" y2="23"/>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    </div>
+    <div class="stat-content">
+      <span class="stat-value <%= result.difference >= 0 ? 'positive' : 'negative' %>">
+        $<%= number_with_delimiter(result.difference.abs.round(2)) %>
+      </span>
+      <span class="stat-label">Diferencia Total</span>
+      <span class="stat-detail">
+        Banco: $<%= number_with_delimiter(result.bank_total_amount.round(2)) %> /
+        Ventas: $<%= number_with_delimiter(result.sales_total_amount.round(2)) %>
+      </span>
+    </div>
+  </div>
+</div>

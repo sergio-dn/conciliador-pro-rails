@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-02-03 18:06:41 -0300",
+  "ruby_version": "2.6.10",
+  "summary": {
+    "total_bank": 4,
+    "total_sales": 4,
+    "total_matched": 3
+  },
+  "improvements_verified": [
+    "Configurable amount tolerance",
+    "Configurable date tolerance",
+    "PORO compatibility without full Rails stack"
+  ]
+}

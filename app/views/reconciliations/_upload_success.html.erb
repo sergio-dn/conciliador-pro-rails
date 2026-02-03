@@ -1,0 +1,23 @@
+<div id="<%= type %>_upload" class="upload-card success">
+  <div class="upload-success">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    <h3>
+      <% if type == 'bank' %>
+        Extracto Bancario Cargado
+      <% else %>
+        Registro de Ventas Cargado
+      <% end %>
+    </h3>
+    <p class="file-info"><%= filename %></p>
+    <p class="record-count"><strong><%= count %></strong> registros detectados</p>
+
+    <button type="button" class="change-btn" onclick="location.reload()">
+      Cambiar archivo
+    </button>
+  </div>
+</div>

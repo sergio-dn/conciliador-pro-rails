@@ -1,0 +1,31 @@
+<% can_reconcile = bank_count > 0 && sales_count > 0 %>
+
+<div class="reconcile-section">
+  <% if can_reconcile %>
+    <%= form_with url: reconciliations_path, method: :post, local: true, class: "reconcile-form" do %>
+      <button type="submit" class="reconcile-btn">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Iniciar Conciliación
+        <span class="record-summary">(<%= bank_count %> banco / <%= sales_count %> ventas)</span>
+      </button>
+    <% end %>
+  <% else %>
+    <div class="waiting-message">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      <p>Carga ambos archivos para iniciar la conciliación</p>
+      <div class="status-indicators">
+        <span class="status-item <%= bank_count > 0 ? 'loaded' : 'pending' %>">
+          <% if bank_count > 0 %>✓<% else %>○<% end %> Banco
+        </span>
+        <span class="status-item <%= sales_count > 0 ? 'loaded' : 'pending' %>">
+          <% if sales_count > 0 %>✓<% else %>○<% end %> Ventas
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>

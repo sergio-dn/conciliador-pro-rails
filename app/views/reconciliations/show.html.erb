@@ -1,0 +1,44 @@
+<div class="results-page">
+  <%= render 'stats_cards', result: @result %>
+
+  <div class="results-container" data-controller="tabs">
+    <%= render 'tabs_navigation', result: @result, current_tab: @current_tab %>
+
+    <turbo-frame id="results_table">
+      <%= render 'results_table', result: @result, current_tab: @current_tab %>
+    </turbo-frame>
+  </div>
+
+  <div class="actions-bar">
+    <div class="export-buttons">
+      <%= link_to exports_path(type: 'all'), method: :post, class: "export-btn primary" do %>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Exportar Reporte Completo
+      <% end %>
+
+      <%= link_to exports_path(type: 'matched'), method: :post, class: "export-btn" do %>
+        Exportar Conciliados
+      <% end %>
+
+      <%= link_to exports_path(type: 'unmatched_bank'), method: :post, class: "export-btn" do %>
+        Exportar No Conciliados Banco
+      <% end %>
+
+      <%= link_to exports_path(type: 'unmatched_sales'), method: :post, class: "export-btn" do %>
+        Exportar No Conciliados Ventas
+      <% end %>
+    </div>
+
+    <%= link_to reset_reconciliations_path, method: :delete, class: "reset-btn", data: { turbo_method: :delete } do %>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="1 4 1 10 7 10"/>
+        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+      </svg>
+      Nueva Conciliación
+    <% end %>
+  </div>
+</div>

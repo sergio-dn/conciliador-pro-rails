@@ -1,0 +1,42 @@
+<div class="results-summary">
+  <div class="summary-header">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+      <polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <h2>Conciliación Completada</h2>
+  </div>
+
+  <div class="summary-stats">
+    <div class="summary-stat">
+      <span class="value"><%= result.match_rate %>%</span>
+      <span class="label">Tasa de Match</span>
+    </div>
+    <div class="summary-stat">
+      <span class="value"><%= result.total_matched %></span>
+      <span class="label">Conciliados</span>
+    </div>
+    <div class="summary-stat warning">
+      <span class="value"><%= result.unmatched_bank_count + result.unmatched_sales_count %></span>
+      <span class="label">Sin Conciliar</span>
+    </div>
+  </div>
+
+  <div class="summary-actions">
+    <%= link_to reconciliation_path(result.id), class: "view-results-btn" do %>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      Ver Resultados Detallados
+    <% end %>
+
+    <%= link_to reset_reconciliations_path, method: :delete, class: "new-reconciliation-btn", data: { turbo_method: :delete } do %>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="1 4 1 10 7 10"/>
+        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+      </svg>
+      Nueva Conciliación
+    <% end %>
+  </div>
+</div>

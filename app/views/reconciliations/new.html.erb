@@ -1,0 +1,7 @@
+<div id="main_content">
+  <% if @result %>
+    <%= render 'results_summary', result: @result %>
+  <% else %>
+    <%= render 'upload_form' %>
+  <% end %>
+</div>
